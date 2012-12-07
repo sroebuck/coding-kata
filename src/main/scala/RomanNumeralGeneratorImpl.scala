@@ -1,13 +1,21 @@
 object RomanNumeralGeneratorImpl extends RomanNumeralGenerator {
 	
   def generate(number: Int): String = {
-    assume(number <= 100)
+    assume(number > 0 && number <= 3999)
     number match {
       case x if x <= 10 => lookupUnits(number)
       case x if x <= 100 =>
         val units = x % 10
         val tens = x / 10
         lookupTens(tens) + lookupUnits(units)
+      case x if x <= 1000 =>
+        val remainder = x % 100
+        val hundreds = x / 100
+        lookupHundreds(hundreds) + generate(remainder)
+      case x =>
+        val remainder = x % 1000
+        val thousands = x / 1000
+        lookupThousands(thousands) + generate(remainder)
     }
   }
 
@@ -37,6 +45,27 @@ object RomanNumeralGeneratorImpl extends RomanNumeralGenerator {
       8 -> "XXC",
       9 -> "XC",
       10 -> "C"
+    )
+
+  private lazy val lookupHundreds = Map(
+      0 -> "",
+      1 -> "C",
+      2 -> "CC",
+      3 -> "CCC",
+      4 -> "CCCC",
+      5 -> "CCCCC",
+      6 -> "CCCCM",
+      7 -> "CCCM",
+      8 -> "CCM",
+      9 -> "CM",
+      10 -> "M"
+    )
+
+  private lazy val lookupThousands = Map(
+      0 -> "",
+      1 -> "M",
+      2 -> "MM",
+      3 -> "MMM"
     )
 
 }

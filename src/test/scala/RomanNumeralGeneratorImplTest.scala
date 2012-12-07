@@ -11,7 +11,10 @@ class RomanNumeralGeneratorImplTest extends FunSuite {
     assert(RomanNumeralGeneratorImpl.generate(30) === "XXX")
     assert(RomanNumeralGeneratorImpl.generate(50) === "XXXXX")
     assert(RomanNumeralGeneratorImpl.generate(60) === "XXXXC")
-
+    assert(RomanNumeralGeneratorImpl.generate(140) === "CXXXX")
+    assert(RomanNumeralGeneratorImpl.generate(286) === "CCXXCVI")
+    assert(RomanNumeralGeneratorImpl.generate(1245) === "MCCXXXXV")
+    assert(RomanNumeralGeneratorImpl.generate(3999) === "MMMCMXCIX")
   }
 
 
